@@ -1,0 +1,21 @@
+int main() {
+    system("cls");
+ 
+ 
+    const auto memory = Memory{ "Among Us.exe" };
+    uintptr_t baseaddr = memory.GetModuleAddress("Assembly-CSharp.dll");
+ 
+    std::cout << "ModuleAddr: 0x" << std::hex << baseaddr << std::dec << std::endl;
+ 
+    uintptr_t PlayerControl = memory.Read<uintptr_t>(baseaddr + 0x203DD7C0);
+ 
+    if(!PlayerControl)
+       std::cout << "player control is null." << std::endl;
+ 
+    bool invent = memory.Read<bool>(PlayerControl + 0x48);
+ 
+ 
+    std::cout << invent ? "hell yeah" : "false" << std::endl;
+ 
+    return 0;
+}
